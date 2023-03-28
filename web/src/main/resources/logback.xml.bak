@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<jmxConfigurator />
+    <property name="LOG_HOME" value="/data/logs/" />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} %-5p [%t] %logger{36}(%L\) - %m%n</pattern>
+		</encoder>
+	</appender>
+	
+	
+	<appender name ="asyncConsole" class= "ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold >0</discardingThreshold>
+        <queueSize>2048</queueSize>
+         <includeCallerData>true</includeCallerData>
+        <appender-ref ref ="console"/>
+    </appender>
+    
+    
+    
+	<!--info level -->
+	<logger name="org.springframework" level="INFO"/>
+	<logger name="com.ibatis" level="INFO"/>
+	<logger name="java.sql" level="INFO"/>
+	<logger name="org.apache.zookeeper" level="INFO"/>
+	
+
+	<!-- root -->
+	<root level="${logback.root.level}">
+		<appender-ref ref="asyncConsole" />
+	</root>
+</configuration>

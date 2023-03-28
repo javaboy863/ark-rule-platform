@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ark.rule.platform.domain.dao.MetaDao">
+  <resultMap id="BaseResultMap" type="com.ark.rule.platform.domain.dao.domain.MetaDO">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="meta_name" jdbcType="VARCHAR" property="metaName" />
+    <result column="meta_code" jdbcType="VARCHAR" property="metaCode" />
+    <result column="limit_operator" jdbcType="VARCHAR" property="limitOperator" />
+    <result column="value_type" jdbcType="TINYINT" property="valueType" />
+    <result column="default_value" jdbcType="VARCHAR" property="defaultValue" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    id, meta_name, meta_code, limit_operator, value_type, default_value, remark, is_delete,
+    create_user, update_user, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDOExample" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_meta
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from t_meta
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    delete from t_meta
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDOExample">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    delete from t_meta
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDO" useGeneratedKeys="true">
+    insert into t_meta (meta_name, meta_code, limit_operator, 
+      value_type, default_value, remark, 
+      is_delete, create_user, update_user, 
+      create_time, update_time)
+    values (#{metaName,jdbcType=VARCHAR}, #{metaCode,jdbcType=VARCHAR}, #{limitOperator,jdbcType=VARCHAR}, 
+      #{valueType,jdbcType=TINYINT}, #{defaultValue,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=BIT}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDO" useGeneratedKeys="true">
+    insert into t_meta
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="metaName != null">
+        meta_name,
+      </if>
+      <if test="metaCode != null">
+        meta_code,
+      </if>
+      <if test="limitOperator != null">
+        limit_operator,
+      </if>
+      <if test="valueType != null">
+        value_type,
+      </if>
+      <if test="defaultValue != null">
+        default_value,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="metaName != null">
+        #{metaName,jdbcType=VARCHAR},
+      </if>
+      <if test="metaCode != null">
+        #{metaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="limitOperator != null">
+        #{limitOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="valueType != null">
+        #{valueType,jdbcType=TINYINT},
+      </if>
+      <if test="defaultValue != null">
+        #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDOExample" resultType="java.lang.Long">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    select count(*) from t_meta
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    update t_meta
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.metaName != null">
+        meta_name = #{record.metaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metaCode != null">
+        meta_code = #{record.metaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitOperator != null">
+        limit_operator = #{record.limitOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueType != null">
+        value_type = #{record.valueType,jdbcType=TINYINT},
+      </if>
+      <if test="record.defaultValue != null">
+        default_value = #{record.defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=BIT},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    update t_meta
+    set id = #{record.id,jdbcType=BIGINT},
+      meta_name = #{record.metaName,jdbcType=VARCHAR},
+      meta_code = #{record.metaCode,jdbcType=VARCHAR},
+      limit_operator = #{record.limitOperator,jdbcType=VARCHAR},
+      value_type = #{record.valueType,jdbcType=TINYINT},
+      default_value = #{record.defaultValue,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=BIT},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDO">
+    <!--
+    @mbg.generated
+      This element was generated on 2019-12-30 15:24:29.
+    -->
+    update t_meta
+    <set>
+      <if test="metaName != null">
+        meta_name = #{metaName,jdbcType=VARCHAR},
+      </if>
+      <if test="metaCode != null">
+        meta_code = #{metaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="limitOperator != null">
+        limit_operator = #{limitOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="valueType != null">
+        value_type = #{valueType,jdbcType=TINYINT},
+      </if>
+      <if test="defaultValue != null">
+        default_value = #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ark.rule.platform.domain.dao.domain.MetaDO">
+    update t_meta
+    set meta_name = #{metaName,jdbcType=VARCHAR},
+      meta_code = #{metaCode,jdbcType=VARCHAR},
+      limit_operator = #{limitOperator,jdbcType=VARCHAR},
+      value_type = #{valueType,jdbcType=TINYINT},
+      default_value = #{defaultValue,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
